@@ -1,0 +1,422 @@
+<title>تقرير برنامج تدريب نجاح العملاء</title>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800&family=Tajawal:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f6f5f8; --surface:#ffffff; --surface-2:#faf9fc; --border:#e2dee8;
+  --text:#211c2b; --dim:#625c70; --faint:#948d9f;
+  --teal:#00A4A6; --teal-ink:#006466; --teal-tint:#e2f4f4;
+  --purple:#653165; --purple-ink:#3e1d3f; --purple-tint:#f1e7f1;
+  --ok:#2f7d4f; --ok-tint:#e3f2e8; --warn:#9a5b08; --warn-tint:#fbefd9; --bad:#a83b3b; --bad-tint:#f8e3e3; --info:#2d5f8f; --info-tint:#e3edf7;
+  --shadow:0 1px 2px rgba(40,25,50,.05),0 10px 26px -16px rgba(40,25,50,.2);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#17141c; --surface:#211d28; --surface-2:#272330; --border:#393343;
+    --text:#f1eef5; --dim:#b5aec2; --faint:#857e93;
+    --teal:#3fc9cb; --teal-ink:#bdf0f0; --teal-tint:#12302f;
+    --purple:#c79bc8; --purple-ink:#efdfef; --purple-tint:#33233a;
+    --ok:#7fcf9c; --ok-tint:#173023; --warn:#e9b25c; --warn-tint:#3a2b12; --bad:#ec8f8f; --bad-tint:#3d1d1d; --info:#8fbbe6; --info-tint:#16273a;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 26px -16px rgba(0,0,0,.55);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#17141c; --surface:#211d28; --surface-2:#272330; --border:#393343;
+  --text:#f1eef5; --dim:#b5aec2; --faint:#857e93;
+  --teal:#3fc9cb; --teal-ink:#bdf0f0; --teal-tint:#12302f;
+  --purple:#c79bc8; --purple-ink:#efdfef; --purple-tint:#33233a;
+  --ok:#7fcf9c; --ok-tint:#173023; --warn:#e9b25c; --warn-tint:#3a2b12; --bad:#ec8f8f; --bad-tint:#3d1d1d; --info:#8fbbe6; --info-tint:#16273a;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 26px -16px rgba(0,0,0,.55);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--text);font-family:'Tajawal','IBM Plex Sans',-apple-system,'Segoe UI',Tahoma,sans-serif;line-height:1.7;font-size:15px;font-variant-numeric:tabular-nums}
+html[lang="en"] body{font-family:'IBM Plex Sans',-apple-system,'Segoe UI',sans-serif;font-size:14.5px}
+html[lang="ar"] [data-l="en"], html[lang="en"] [data-l="ar"]{display:none!important}
+h1,h2,h3{font-family:'Cairo','IBM Plex Sans',sans-serif;text-wrap:balance;margin:0}
+html[lang="en"] h1,html[lang="en"] h2,html[lang="en"] h3{font-family:'IBM Plex Sans',sans-serif}
+a{color:var(--teal-ink)}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:20px;padding-block:24px 64px}
+
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+.crumb{font-size:12.5px;color:var(--dim);font-family:'IBM Plex Mono',monospace;direction:ltr;unicode-bidi:isolate}
+.lang-btn{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1.5px solid var(--border);color:var(--text);border-radius:999px;padding:7px 14px;font:600 13px 'IBM Plex Sans',sans-serif;cursor:pointer}
+.lang-btn:hover{border-color:var(--teal)}
+.lang-btn:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.lang-btn svg{width:17px;height:17px}
+
+.hero{background:linear-gradient(135deg,#653165 0%,#00A4A6 100%);color:#fff;border-radius:20px;padding:30px 30px 26px;box-shadow:var(--shadow);margin-bottom:22px}
+.hero .eyebrow{display:inline-block;font:600 11.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;text-transform:uppercase;background:rgba(255,255,255,.16);padding:4px 10px;border-radius:999px;margin-bottom:12px;direction:ltr;unicode-bidi:isolate}
+.hero h1{font-size:28px;font-weight:800;margin-bottom:8px}
+.hero p{margin:0;max-width:70ch;color:rgba(255,255,255,.9)}
+.hero .meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:16px;font-size:13px;color:rgba(255,255,255,.88)}
+.hero .meta b{color:#fff}
+.hero-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.hl{display:inline-flex;align-items:center;gap:8px;background:#fff;color:#3e1d3f;text-decoration:none;font-weight:700;font-size:13px;padding:9px 15px;border-radius:11px}
+.hl.ghost{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.35)}
+.hl svg{width:15px;height:15px}
+
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:26px}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 16px}
+.kpi b{display:block;font:800 26px 'Cairo','IBM Plex Sans',sans-serif;color:var(--purple);line-height:1.2}
+.kpi span{font-size:12.5px;color:var(--dim)}
+
+section{margin-bottom:30px}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px;border-bottom:1.5px solid var(--border);padding-bottom:8px}
+.sec-head .n{font:600 12px 'IBM Plex Mono',monospace;color:var(--teal-ink);background:var(--teal-tint);border-radius:7px;padding:2px 8px;direction:ltr}
+.sec-head h2{font-size:20px;color:var(--text)}
+.lead{color:var(--dim);margin:0 0 14px;max-width:80ch}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px 20px;box-shadow:var(--shadow)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+ul.pts{margin:0;padding-inline-start:20px;display:flex;flex-direction:column;gap:6px}
+ul.pts li b{color:var(--text)}
+
+.days{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.day{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.day .dn{font:800 13px 'Cairo','IBM Plex Sans',sans-serif;color:var(--purple)}
+.day h3{font-size:14.5px;line-height:1.45}
+.day p{margin:0;font-size:12.5px;color:var(--dim)}
+.pill{display:inline-block;font-size:11.5px;font-weight:700;border-radius:999px;padding:2px 10px;width:fit-content}
+.p-ok{background:var(--ok-tint);color:var(--ok)}
+.p-warn{background:var(--warn-tint);color:var(--warn)}
+.p-bad{background:var(--bad-tint);color:var(--bad)}
+.p-info{background:var(--info-tint);color:var(--info)}
+.p-purple{background:var(--purple-tint);color:var(--purple-ink)}
+
+.sched{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:14px}
+.slot{background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:9px 10px;font-size:12px;color:var(--dim)}
+.slot .t{display:block;font:600 12px 'IBM Plex Mono',monospace;color:var(--teal-ink);direction:ltr;unicode-bidi:isolate;margin-bottom:3px}
+
+.tbl-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:14px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:720px;font-size:13.5px}
+th{text-align:start;font-weight:700;color:var(--dim);font-size:12px;padding:10px 12px;border-bottom:1.5px solid var(--border);background:var(--surface-2)}
+td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.name{font-weight:700;white-space:nowrap}
+td .en-name{direction:ltr;unicode-bidi:isolate}
+.mono{font-family:'IBM Plex Mono',monospace;direction:ltr;unicode-bidi:isolate;font-size:12.5px}
+
+.timeline{position:relative;display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.tl-row{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center}
+.tl-name{font-size:12.5px;font-weight:700}
+.tl-bar{display:flex;gap:3px;flex-wrap:wrap}
+.tl-c{font-size:10.5px;border-radius:6px;padding:3px 7px;white-space:nowrap}
+.c-tr{background:var(--info-tint);color:var(--info)}
+.c-off{background:var(--surface-2);color:var(--faint);border:1px dashed var(--border)}
+.c-abs{background:var(--warn-tint);color:var(--warn)}
+.c-act{background:var(--ok-tint);color:var(--ok)}
+.c-sale{background:var(--bad-tint);color:var(--bad)}
+
+.obs{display:flex;flex-direction:column;gap:10px}
+.obs-item{display:grid;grid-template-columns:28px 1fr;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 14px}
+.obs-item .ix{font:700 13px 'IBM Plex Mono',monospace;color:var(--teal-ink);background:var(--teal-tint);border-radius:8px;height:28px;display:flex;align-items:center;justify-content:center}
+.obs-item h3{font-size:14.5px;margin-bottom:3px}
+.obs-item p{margin:0;font-size:13.5px;color:var(--dim)}
+.rec{border-inline-start:4px solid var(--purple)}
+.rec .ix{background:var(--purple-tint);color:var(--purple-ink)}
+
+.res-group{margin-bottom:14px}
+.res-group h3{font-size:14px;color:var(--purple);margin-bottom:8px}
+.res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.res{display:flex;flex-direction:column;gap:2px;background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:10px 12px;text-decoration:none;color:var(--text);transition:border-color .15s}
+.res:hover{border-color:var(--teal)}
+.res:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.res b{font-size:13.5px}
+.res .slug{font-size:11.5px;color:var(--faint);font-family:'IBM Plex Mono',monospace;direction:ltr;unicode-bidi:isolate;text-align:start}
+
+.files{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.file{display:grid;grid-template-columns:36px 1fr;gap:10px;align-items:start;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 14px;text-decoration:none;color:var(--text)}
+.file:hover{border-color:var(--teal)}
+.file .ic{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;background:var(--teal-tint);color:var(--teal-ink)}
+.file .ic svg{width:18px;height:18px}
+.file b{display:block;font-size:13.5px}
+.file small{color:var(--dim);font-size:12.5px}
+.file .fn{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--faint);direction:ltr;unicode-bidi:isolate;display:block}
+
+footer{text-align:center;font-size:12px;color:var(--faint);padding-top:20px;border-top:1px solid var(--border);margin-top:10px}
+
+@media (max-width:860px){
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .days{grid-template-columns:1fr 1fr}
+  .grid2,.files{grid-template-columns:1fr}
+  .grid3,.res-grid{grid-template-columns:1fr 1fr}
+  .sched{grid-template-columns:repeat(2,1fr)}
+  .tl-row{grid-template-columns:1fr}
+}
+@media (max-width:480px){
+  .days,.grid3,.res-grid{grid-template-columns:1fr}
+  .hero{padding:22px 18px}
+  .hero h1{font-size:22px}
+}
+</style>
+
+<div class="wrap">
+  <div class="topbar">
+    <span class="crumb">QA-CSM / New Agents_Sep2026</span>
+    <button class="lang-btn" id="langBtn" type="button" aria-label="Switch language">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>
+      <span data-l="ar">English</span><span data-l="en">العربية</span>
+    </button>
+  </div>
+
+  <header class="hero">
+    <span class="eyebrow">CSM · Rewaa · Training Program Report</span>
+    <h1><span data-l="ar">تقرير برنامج تدريب موظفي نجاح العملاء</span><span data-l="en">CSM Onboarding Training Program — Report</span></h1>
+    <p>
+      <span data-l="ar">تقرير يوثّق بناء برنامج تدريبي متكامل لموظفي نجاح العملاء الجدد مبني على بوابة نجاح العملاء، ومتابعة دفعة متدربي سبتمبر 2026، والملاحظات التشغيلية والتوصيات، والمصادر المعرفية التي بُنيت لدعم الموظفين الحاليين والجدد.</span>
+      <span data-l="en">This report documents the design of a complete onboarding program for new Customer Success Managers built on the CSM Portal, the follow-up of the September 2026 trainee cohort, operational observations and recommendations, and the knowledge resources built to support both current and new employees.</span>
+    </p>
+    <div class="meta">
+      <span><span data-l="ar">الفترة:</span><span data-l="en">Period:</span> <b class="mono" style="color:#fff">Sep 02 – Sep 30, 2026</b></span>
+      <span><span data-l="ar">الإعداد:</span><span data-l="en">Prepared by:</span> <b><span data-l="ar">قسم الجودة — فريق نجاح العملاء</span><span data-l="en">Quality Department — Customer Success</span></b></span>
+    </div>
+    <div class="hero-links">
+      <a class="hl" href="https://fyousef-2023.github.io/CSM_Training_Program/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>
+        <span data-l="ar">منصة البرنامج التدريبي</span><span data-l="en">Training Program Platform</span>
+      </a>
+      <a class="hl ghost" href="https://drive.google.com/drive/folders/1THO2myqQgNM_dVhNhynGf3hLVGavUiRd?usp=sharing" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+        <span data-l="ar">مجلد ملفات المشروع</span><span data-l="en">Project Files Folder</span>
+      </a>
+      <a class="hl ghost" href="https://fyousef-2023.github.io/CSM-PORTAL/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg>
+        <span data-l="ar">بوابة نجاح العملاء</span><span data-l="en">CSM Portal</span>
+      </a>
+    </div>
+  </header>
+
+  <div class="kpis">
+    <div class="kpi"><b>6</b><span data-l="ar">متدربات في دفعة سبتمبر 2026</span><span data-l="en">Trainees in the Sep 2026 cohort</span></div>
+    <div class="kpi"><b>5</b><span data-l="ar">أيام تدريب، بثلاث جلسات يومياً</span><span data-l="en">Training days, three sessions each</span></div>
+    <div class="kpi"><b>15</b><span data-l="ar">جلسة تدريبية، مع اختبار يومي وتاسكات تطبيقية</span><span data-l="en">Training sessions, with daily quizzes and hands-on tasks</span></div>
+    <div class="kpi"><b>22</b><span data-l="ar">مصدراً معرفياً مبنياً على البوابة</span><span data-l="en">Knowledge resources built for the portal</span></div>
+  </div>
+
+  <!-- 1 -->
+  <section>
+    <div class="sec-head"><span class="n">01</span><h2><span data-l="ar">الملخص التنفيذي</span><span data-l="en">Executive Summary</span></h2></div>
+    <div class="card">
+      <ul class="pts">
+        <li data-l="ar"><b>برنامج تدريبي موحّد:</b> بناء برنامج من خمسة أيام عمل يحوّل محتوى بوابة نجاح العملاء إلى مسار تعلّم متدرّج، يتعلّم فيه المتدرب مضمون كل مصدر معرفي، وطريقة الوصول إليه من البوابة، وكيفية استخدامه مع العميل.</li>
+        <li data-l="en"><b>A unified program:</b> a five-day program that turns the CSM Portal into a progressive learning path, where trainees learn each knowledge resource, how to reach it in the portal, and how to apply it with customers.</li>
+        <li data-l="ar"><b>إعادة ترتيب المحتوى حسب الترابط:</b> توزيع المواضيع على الأيام وفق تسلسل منطقي؛ من التعريف بالشركة والدور، إلى التفعيل، ثم أدوات العمل والتوثيق، فالخدمات المالية وبرامج الدعم، وأخيراً إعادة التفعيل وإدارة الحالات والجودة.</li>
+        <li data-l="en"><b>Content sequenced by dependency:</b> topics ordered logically — company and role, then activation, daily tools and documentation, payments and support programs, and finally reactivation, case management and quality.</li>
+        <li data-l="ar"><b>متابعة دفعة سبتمبر:</b> تدريب ومتابعة ست متدربات بين 2 و30 سبتمبر 2026، مع توثيق يومي لحضورهن ومسارهن في جدول زمني موحّد.</li>
+        <li data-l="en"><b>September cohort:</b> six trainees trained and followed between Sep 2 and Sep 30, 2026, with daily attendance and progress tracked in a unified timeline.</li>
+        <li data-l="ar"><b>توصيات جاهزية:</b> رصد عوائق تشغيلية أثّرت على بداية التدريب، وتحويلها إلى ثلاث قواعد جاهزية واضحة قبل اليوم الأول.</li>
+        <li data-l="en"><b>Readiness rules:</b> operational blockers that affected training start were captured and turned into three clear pre-Day-1 readiness rules.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section>
+    <div class="sec-head"><span class="n">02</span><h2><span data-l="ar">البرنامج التدريبي</span><span data-l="en">The Training Program</span></h2></div>
+    <p class="lead"><span data-l="ar">خمسة أيام، ثلاث جلسات تدريبية يومياً، تاسكات تطبيقية متعددة، اختبار صباحي من اليوم الثاني، اختبار شفهي في ختام كل يوم، وتاسك ثابت يومي هو حضور الويبينار والتطبيق العملي عليه.</span><span data-l="en">Five days, three training sessions daily, multiple hands-on tasks, a morning quiz from Day 2, an oral check at the end of each day, and a fixed daily task: attending the webinar and applying it in practice.</span></p>
+
+    <div class="days">
+      <div class="day"><span class="dn"><span data-l="ar">اليوم 1</span><span data-l="en">Day 1</span></span><h3><span data-l="ar">رِواء ودور موظف نجاح العملاء</span><span data-l="en">Rewaa &amp; the CSM Role</span></h3><p><span data-l="ar">التدريب التعريفي، دور الموظف، رحلة العميل، جولة البوابة، الالتزام بالجدول، مهارات التواصل.</span><span data-l="en">Onboarding deck, CSM role, customer journey, portal tour, schedule compliance, communication skills.</span></p><span class="pill p-ok"><span data-l="ar">مكتمل</span><span data-l="en">Finalized</span></span></div>
+      <div class="day"><span class="dn"><span data-l="ar">اليوم 2</span><span data-l="en">Day 2</span></span><h3><span data-l="ar">التفعيل من الاستلام حتى التشغيل</span><span data-l="en">Activation Journey</span></h3><p><span data-l="ar">مراحل التفعيل، أتمتة الإعداد، رفع المنتجات، قنوات التدريب، الأجهزة.</span><span data-l="en">Activation stages, onboarding automation, product upload, training channels, devices.</span></p><span class="pill p-ok"><span data-l="ar">مكتمل</span><span data-l="en">Finalized</span></span></div>
+      <div class="day"><span class="dn"><span data-l="ar">اليوم 3</span><span data-l="en">Day 3</span></span><h3><span data-l="ar">أدوات العمل اليومية والتوثيق</span><span data-l="en">Daily Tools &amp; Documentation</span></h3><p><span data-l="ar">CRM، Metabase، Admin Panel، التوثيق، Maqsam و3CX، التاج، المكالمة، Open CX.</span><span data-l="en">CRM, Metabase, Admin Panel, documentation, Maqsam &amp; 3CX, tags, call checklist, Open CX.</span></p><span class="pill p-ok"><span data-l="ar">مكتمل</span><span data-l="en">Finalized</span></span></div>
+      <div class="day"><span class="dn"><span data-l="ar">اليوم 4</span><span data-l="en">Day 4</span></span><h3><span data-l="ar">الخدمات المالية وبرامج الدعم</span><span data-l="en">Payments &amp; Support Programs</span></h3><p><span data-l="ar">رِواء باي، فاتورة الاشتراك، الباقات، Grubtech، دعم الفوترة ومنشآت، الكاش باك، Frill.</span><span data-l="en">RewaaPay, subscription invoice, packages, Grubtech, ZATCA &amp; Monsha'at support, cashback, Frill.</span></p><span class="pill p-ok"><span data-l="ar">مكتمل</span><span data-l="en">Finalized</span></span></div>
+      <div class="day"><span class="dn"><span data-l="ar">اليوم 5</span><span data-l="en">Day 5</span></span><h3><span data-l="ar">إعادة التفعيل والحالات والجودة</span><span data-l="en">Reactivation, Cases &amp; Quality</span></h3><p><span data-l="ar">Health Score، إعادة التفعيل، إدارة الحالات، معايير الجودة، اختبار ختامي شامل.</span><span data-l="en">Health Score, reactivation, case management, quality criteria, final comprehensive quiz.</span></p><span class="pill p-ok"><span data-l="ar">مكتمل</span><span data-l="en">Finalized</span></span></div>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <h3 style="font-size:15px;margin-bottom:4px"><span data-l="ar">هيكل اليوم التدريبي الثابت</span><span data-l="en">Fixed Daily Structure</span></h3>
+      <div class="sched">
+        <div class="slot"><span class="t">09:00</span><span data-l="ar">اختبار (من اليوم الثاني)</span><span data-l="en">Quiz (from Day 2)</span></div>
+        <div class="slot"><span class="t">09:30</span><span data-l="ar">الجلسة الأولى</span><span data-l="en">Session 1</span></div>
+        <div class="slot"><span class="t">11:00</span><span data-l="ar">استراحة + مراجعة + تاسكات</span><span data-l="en">Break, review &amp; tasks</span></div>
+        <div class="slot"><span class="t">13:30</span><span data-l="ar">الجلسة الثانية</span><span data-l="en">Session 2</span></div>
+        <div class="slot"><span class="t">15:00</span><span data-l="ar">استراحة</span><span data-l="en">Break</span></div>
+        <div class="slot"><span class="t">16:00</span><span data-l="ar">تاسكات + الويبينار</span><span data-l="en">Tasks + webinar</span></div>
+        <div class="slot"><span class="t">17:00</span><span data-l="ar">الجلسة الختامية والشفهي</span><span data-l="en">Closing &amp; oral check</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section>
+    <div class="sec-head"><span class="n">03</span><h2><span data-l="ar">المتدربات ومسار كل منهن</span><span data-l="en">Trainees &amp; Progress</span></h2></div>
+    <p class="lead"><span data-l="ar">ست متدربات التحقن بالتدريب على دفعات بين 2 و30 سبتمبر 2026، ووُثّق مسار كل منهن يومياً في ملف الجدول الزمني للمتدربات.</span><span data-l="en">Six trainees joined in waves between Sep 2 and Sep 30, 2026; each trainee's path was logged daily in the trainee timeline file.</span></p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr>
+          <th><span data-l="ar">المتدربة</span><span data-l="en">Trainee</span></th>
+          <th><span data-l="ar">تاريخ الالتحاق</span><span data-l="en">Joined</span></th>
+          <th><span data-l="ar">أيام التدريب</span><span data-l="en">Training days</span></th>
+          <th><span data-l="ar">الحالة</span><span data-l="en">Status</span></th>
+          <th><span data-l="ar">التفاصيل</span><span data-l="en">Details</span></th>
+        </tr></thead>
+        <tbody>
+          <tr><td class="name"><span class="en-name">Rama Al-Hadidi</span></td><td class="mono">Sep 02</td><td class="mono">3</td><td><span class="pill p-ok"><span data-l="ar">انتقلت للعمل الفعلي</span><span data-l="en">Active operations</span></span></td><td><span data-l="ar">اليوم الأول 2 سبتمبر (10 ص)، الثاني 3 سبتمبر، غياب 6 سبتمبر، اكتمال التدريب في اليوم الثالث 7 سبتمبر، وبدء العمل الفعلي 8 سبتمبر.</span><span data-l="en">Day 1 Sep 2 (10 AM), Day 2 Sep 3, absent Sep 6, onboarding completed on Day 3 (Sep 7), active operations from Sep 8.</span></td></tr>
+          <tr><td class="name"><span class="en-name">Rawan Alassar</span></td><td class="mono">Sep 06</td><td class="mono">2</td><td><span class="pill p-bad"><span data-l="ar">انتقلت للمبيعات</span><span data-l="en">Moved to Sales</span></span></td><td><span data-l="ar">اليوم الأول 6 سبتمبر (12 م)، الثاني 7 سبتمبر، ثم انتقلت إلى فريق المبيعات بعد الجلسة الأولى في 8 سبتمبر.</span><span data-l="en">Day 1 Sep 6 (12 PM), Day 2 Sep 7, transferred to Sales after Session 1 on Sep 8.</span></td></tr>
+          <tr><td class="name"><span class="en-name">Dareen Taifour</span></td><td class="mono">Sep 09</td><td class="mono">2</td><td><span class="pill p-bad"><span data-l="ar">انتقلت للمبيعات</span><span data-l="en">Moved to Sales</span></span></td><td><span data-l="ar">اليوم الأول 9 سبتمبر (9:30 ص)، الثاني 10 سبتمبر، ثم تأهيل حضوري في المقر وانتقال إلى فريق المبيعات في 13 سبتمبر.</span><span data-l="en">Day 1 Sep 9 (9:30 AM), Day 2 Sep 10, in-office HQ onboarding and transfer to Sales on Sep 13.</span></td></tr>
+          <tr><td class="name"><span class="en-name">Maisaa Alqawaqneh</span></td><td class="mono">Sep 17</td><td class="mono">3</td><td><span class="pill p-ok"><span data-l="ar">انتقلت للعمل الفعلي</span><span data-l="en">Active operations</span></span></td><td><span data-l="ar">اليوم الأول 17 سبتمبر (9:30 ص)، الثاني 20 سبتمبر، واكتمال التدريب في اليوم الثالث 21 سبتمبر، ثم مباشرة العمل الفعلي.</span><span data-l="en">Day 1 Sep 17 (9:30 AM), Day 2 Sep 20, onboarding completed on Day 3 (Sep 21), then moved into active operations.</span></td></tr>
+          <tr><td class="name"><span class="en-name">Mona Aljarrah</span></td><td class="mono">Sep 29</td><td class="mono">2</td><td><span class="pill p-info"><span data-l="ar">قيد التدريب</span><span data-l="en">In training</span></span></td><td><span data-l="ar">اليوم الأول 29 سبتمبر (10:15 ص)، والثاني 30 سبتمبر.</span><span data-l="en">Day 1 Sep 29 (10:15 AM), Day 2 Sep 30.</span></td></tr>
+          <tr><td class="name"><span class="en-name">Rama Ahmed</span></td><td class="mono">Sep 30</td><td class="mono">1</td><td><span class="pill p-info"><span data-l="ar">قيد التدريب</span><span data-l="en">In training</span></span></td><td><span data-l="ar">اليوم الأول 30 سبتمبر (11:15 ص).</span><span data-l="en">Day 1 Sep 30 (11:15 AM).</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid3" style="margin-top:12px">
+      <div class="kpi"><b style="color:var(--ok)">2</b><span data-l="ar">أنهتا التدريب في ثلاثة أيام وانتقلتا إلى العمل الفعلي</span><span data-l="en">Completed training in 3 days and moved into active operations</span></div>
+      <div class="kpi"><b style="color:var(--bad)">2</b><span data-l="ar">انتقلتا إلى فريق المبيعات</span><span data-l="en">Transferred to Sales</span></div>
+      <div class="kpi"><b style="color:var(--info)">2</b><span data-l="ar">قيد التدريب حالياً</span><span data-l="en">Currently in training</span></div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section>
+    <div class="sec-head"><span class="n">04</span><h2><span data-l="ar">الملاحظات التشغيلية</span><span data-l="en">Operational Observations</span></h2></div>
+    <div class="obs">
+      <div class="obs-item"><span class="ix">1</span><div><h3><span data-l="ar">استخدام الهاتف المحمول في اليوم الأول</span><span data-l="en">Mobile phones on Day 1</span></h3><p><span data-l="ar">تابعت المتدربات (راما، روان، دارين) التدريب وحضرن الجلسات في اليوم الأول عبر الهاتف المحمول، لعدم تسليمهن لابتوبات العمل الرسمية.</span><span data-l="en">Trainees (Rama, Rawan, Dareen) attended Day 1 sessions on their mobile phones because official work laptops had not been issued.</span></p></div></div>
+      <div class="obs-item"><span class="ix">2</span><div><h3><span data-l="ar">الانشغال بتسليم العمل السابق (Handover)</span><span data-l="en">Prior-role handover</span></h3><p><span data-l="ar">كانت المتدربتان (راما وروان) منشغلتين بإجراءات تسليم المهام مع جهات عملهما السابقة خلال اليوم الأول من التدريب.</span><span data-l="en">Rama and Rawan were busy with handover procedures for their previous teams during Day 1.</span></p></div></div>
+      <div class="obs-item"><span class="ix">3</span><div><h3><span data-l="ar">أجهزة مؤقتة في اليوم الثاني</span><span data-l="en">Temporary devices on Day 2</span></h3><p><span data-l="ar">استخدمت جميع المتدربات أجهزة لابتوب غير مخصصة لهن (أجهزة مستعارة وليست أجهزتهن الرسمية).</span><span data-l="en">All trainees used laptops not assigned to them (borrowed rather than their official devices).</span></p></div></div>
+      <div class="obs-item"><span class="ix">4</span><div><h3><span data-l="ar">إنشاء الحسابات وتفعيلها على المنصات</span><span data-l="en">Account creation and activation</span></h3><p><span data-l="ar">أُنشئت حسابات المنصات التشغيلية وفُعّلت خلال اليوم الأول أو الثاني، باستثناء المتدربة (دارين) التي لم تكتمل إضافتها وتفعيل حساباتها حتى اليوم الثالث.</span><span data-l="en">Operational platform accounts were created and activated on Day 1 or 2, except for Dareen, whose access was not complete until Day 3.</span></p></div></div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section>
+    <div class="sec-head"><span class="n">05</span><h2><span data-l="ar">التوصيات ومتطلبات انطلاق التدريب</span><span data-l="en">Recommendations &amp; Readiness Rules</span></h2></div>
+    <div class="obs">
+      <div class="obs-item rec"><span class="ix">1</span><div><h3><span data-l="ar">التفرغ التام للتدريب</span><span data-l="en">Full availability for training</span></h3><p><span data-l="ar">ضمان جاهزية كل متدربة وانطلاقها في اليوم التدريبي الأول وهي متفرغة تماماً، دون أي ارتباطات تسليم (Handover) سابقة.</span><span data-l="en">Each trainee should start Day 1 fully available, with no outstanding handover commitments from a previous role.</span></p></div></div>
+      <div class="obs-item rec"><span class="ix">2</span><div><h3><span data-l="ar">التسليم المسبق للأجهزة</span><span data-l="en">Devices issued in advance</span></h3><p><span data-l="ar">تسليم لابتوب العمل الرسمي المجهّز للمتدربة قبل بدء اليوم التدريبي الأول.</span><span data-l="en">The official, configured work laptop should be handed over before Day 1 begins.</span></p></div></div>
+      <div class="obs-item rec"><span class="ix">3</span><div><h3><span data-l="ar">التجهيز المسبق للحسابات</span><span data-l="en">Accounts prepared in advance</span></h3><p><span data-l="ar">إتمام إنشاء وتفعيل كافة الحسابات والأنظمة المطلوبة للمتدربة على جميع المنصات التشغيلية قبل اليوم الأول، لضمان الانطلاق المباشر.</span><span data-l="en">All required accounts and systems should be created and activated on every operational platform before Day 1, so training can start immediately.</span></p></div></div>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section>
+    <div class="sec-head"><span class="n">06</span><h2><span data-l="ar">العمل المنجز</span><span data-l="en">Work Delivered</span></h2></div>
+    <div class="grid2">
+      <div class="card">
+        <h3 style="font-size:15px;margin-bottom:8px;color:var(--purple)"><span data-l="ar">تصميم البرنامج وبناؤه</span><span data-l="en">Program design &amp; build</span></h3>
+        <ul class="pts">
+          <li><span data-l="ar">بناء منصة تفاعلية للبرنامج بخمسة أيام وهيكل يومي ثابت، منشورة على GitHub Pages.</span><span data-l="en">Built an interactive five-day program platform with a fixed daily structure, published on GitHub Pages.</span></li>
+          <li><span data-l="ar">إعادة توزيع المواضيع على الأيام حسب ترابطها، بحيث يُبنى كل يوم على ما سبقه دون تكرار.</span><span data-l="en">Re-sequenced topics by dependency so each day builds on the previous one without repetition.</span></li>
+          <li><span data-l="ar">ربط كل موضوع بمصدره في البوابة ومساره داخلها، ليتعلّم المتدرب الوصول إلى المعلومة بنفسه.</span><span data-l="en">Linked every topic to its portal resource and its path, so trainees learn to find information themselves.</span></li>
+          <li><span data-l="ar">اعتماد العرض التقديمي «التدريب التعريفي لموظف نجاح العملاء» أساساً لمحتوى اليوم الأول.</span><span data-l="en">Adopted the "CSM Onboarding Training" deck as the basis of Day 1 content.</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="font-size:15px;margin-bottom:8px;color:var(--purple)"><span data-l="ar">التقييم والمتابعة</span><span data-l="en">Assessment &amp; follow-up</span></h3>
+        <ul class="pts">
+          <li><span data-l="ar">تاسكات تطبيقية لكل يوم بروابطها، منها تحليل مكالمات فعلية وتعبئة المرحلة والسبب والسينتمنت والتاجات.</span><span data-l="en">Hands-on daily tasks with linked briefs, including analysis of real calls (stage, reason, sentiment and tags).</span></li>
+          <li><span data-l="ar">اختبار صباحي يغطي اليوم السابق، وأسئلة شفهية ختامية مقتصرة على ما شُرح فعلياً.</span><span data-l="en">A morning quiz on the previous day and closing oral questions limited to content actually covered.</span></li>
+          <li><span data-l="ar">بنك أسئلة متعددة الخيارات وتاسكات لكل موضوع في ملف Word، مع مفتاح إجابات للمدرب.</span><span data-l="en">A Word bank of multiple-choice questions and topic tasks, with a trainer answer key.</span></li>
+          <li><span data-l="ar">جدول زمني يومي لكل متدربة يوثّق الحضور والغياب والانتقالات والملاحظات.</span><span data-l="en">A per-trainee daily timeline logging attendance, absences, transfers and notes.</span></li>
+          <li><span data-l="ar"><b>تقرير فردي لكل متدربة</b> يُرفع بعد انتهاء تدريبها، ومحفوظ في مجلد التقارير (Reports).</span><span data-l="en"><b>An individual report for each trainee</b>, submitted once her training ends and stored in the Reports folder.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section>
+    <div class="sec-head"><span class="n">07</span><h2><span data-l="ar">المصادر المعرفية المبنية</span><span data-l="en">Knowledge Resources Built</span></h2></div>
+    <p class="lead"><span data-l="ar">مصادر مرجعية بُنيت ضمن بوابة نجاح العملاء، ويعتمد عليها الموظفون الحاليون في عملهم اليومي، والموظفون الجدد خلال التدريب وبعده.</span><span data-l="en">Reference pages built within the CSM Portal, used by current employees in their daily work and by new hires during and after training.</span></p>
+
+    <div class="res-group">
+      <h3><span data-l="ar">البوابة والدور والالتزامات</span><span data-l="en">Portal, role &amp; commitments</span></h3>
+      <div class="res-grid" id="g1"></div>
+    </div>
+    <div class="res-group">
+      <h3><span data-l="ar">رحلة العميل والتفعيل</span><span data-l="en">Customer journey &amp; activation</span></h3>
+      <div class="res-grid" id="g2"></div>
+    </div>
+    <div class="res-group">
+      <h3><span data-l="ar">الخدمات وبرامج الدعم</span><span data-l="en">Services &amp; support programs</span></h3>
+      <div class="res-grid" id="g3"></div>
+    </div>
+    <div class="res-group">
+      <h3><span data-l="ar">إعادة التفعيل والحالات والجودة</span><span data-l="en">Reactivation, cases &amp; quality</span></h3>
+      <div class="res-grid" id="g4"></div>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section>
+    <div class="sec-head"><span class="n">08</span><h2><span data-l="ar">ملفات المشروع</span><span data-l="en">Project Files</span></h2></div>
+    <p class="lead"><span data-l="ar">جميع الملفات محفوظة في مجلد <span class="mono">QA-CSM / New Agents_Sep2026</span> على Google Drive.</span><span data-l="en">All files are stored in the <span class="mono">QA-CSM / New Agents_Sep2026</span> folder on Google Drive.</span></p>
+    <div class="files" id="files"></div>
+  </section>
+
+  <footer>
+    <span data-l="ar">إعداد: قسم الجودة — فريق نجاح العملاء | رِواء</span><span data-l="en">Prepared by: Quality Department — Customer Success Team | Rewaa</span>
+  </footer>
+</div>
+
+<script>
+const P='https://fyousef-2023.github.io/';
+const RES={
+  g1:[
+    ['بوابة نجاح العملاء','CSM Portal','CSM-PORTAL'],
+    ['دور موظف نجاح العملاء','CSM Role','CSM-Role'],
+    ['الالتزام بالجدول اليومي والتحديثات','Daily Schedule & Updates','calendar'],
+    ['الالتزام بالتوثيق','Documentation Compliance','documentation'],
+    ['الالتزام بالتاج','Tagging Compliance','Tagging'],
+    ['دليل التاج','Call Tags Guide','Tag'],
+    ['الالتزام بالمكالمة','Call Checklist','-CSM-Call-Checklist'],
+    ['الالتزام بالرد والتعامل مع المحادثات','Chat Handling Compliance','chat'],
+    ['الالتزام بإدارة الحالات','Case Management Compliance','CaseFollow']
+  ],
+  g2:[
+    ['مراحل التفعيل','Activation Stages','CSM_Stages'],
+    ['رحلة أتمتة الإعداد','Onboarding Automation','Onboarding-Automation'],
+    ['رفع المنتجات','Product Upload','Product'],
+    ['دليل التدريب الشامل','Training Guide','Training']
+  ],
+  g3:[
+    ['رِواء باي','RewaaPay','RewaaPay'],
+    ['فاتورة الاشتراك','Subscription Invoice','Invoice'],
+    ['دليل عملاء Grubtech','Grubtech CSM Guide','Grubtech_CSM_Guide'],
+    ['دعم الفوترة الإلكترونية','E-Invoicing Support','Zatca'],
+    ['دعم مزايا (منشآت)','Monsha’at Support','monshaat'],
+    ['كاش باك رِواء','Rewaa Cashback','Cashback']
+  ],
+  g4:[
+    ['إعادة التفعيل','Customer Reactivation','Reactivation'],
+    ['دليل إدارة الحالات','Cases Guide','CasesV2'],
+    ['معايير جودة التعامل مع العملاء','CSM Quality Criteria','CSM_Quality_Criteria_Interactive']
+  ]
+};
+const DRIVE='https://drive.google.com/drive/folders/1THO2myqQgNM_dVhNhynGf3hLVGavUiRd?usp=sharing';
+const ICON_SHEET='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M4 9h16M4 15h16M10 9v12"/></svg>';
+const ICON_FOLDER='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>';
+const ICON_WEB='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg>';
+const FILES=[
+  [ICON_WEB,'منصة البرنامج التدريبي','Training Program Platform','البرنامج الكامل بالأيام والجلسات والتاسكات والاختبارات.','The full program by day, session, task and quiz.','CSM_Training_Program (GitHub Pages)','https://fyousef-2023.github.io/CSM_Training_Program/'],
+  [ICON_SHEET,'البرنامج التدريبي (Sheets)','Training Program (Sheets)','نسخة جدولية من البرنامج: نظرة عامة وورقة لكل يوم.','Spreadsheet version: overview plus one sheet per day.','CSM_Training_Program',DRIVE],
+  [ICON_SHEET,'الجدول الزمني للمتدربات','Trainee Timeline','متابعة يومية لكل متدربة مع الملاحظات التشغيلية والتوصيات.','Daily tracking per trainee with operational notes and recommendations.','Trainee_Timeline_Blocks_2026',DRIVE],
+  [ICON_FOLDER,'مواد التدريب','Training Material','ملفات التاسكات والاختبارات ومواد الجلسات.','Task briefs, quizzes and session materials.','Training_Material/',DRIVE],
+  [ICON_FOLDER,'التقارير','Reports','تقرير فردي لكل متدربة يوثّق تدريبها ومتابعتها.','An individual training and follow-up report for each trainee.','Reports/',DRIVE]
+];
+function el(id,html){document.getElementById(id).innerHTML=html;}
+for(const g of Object.keys(RES)){
+  el(g,RES[g].map(([ar,en,slug])=>`<a class="res" href="${P}${slug}/" target="_blank" rel="noopener"><b><span data-l="ar">${ar}</span><span data-l="en">${en}</span></b><span class="slug">/${slug}</span></a>`).join(''));
+}
+el('files',FILES.map(([ic,ar,en,dar,den,fn,url])=>`<a class="file" href="${url}" target="_blank" rel="noopener"><span class="ic">${ic}</span><span><b><span data-l="ar">${ar}</span><span data-l="en">${en}</span></b><small><span data-l="ar">${dar}</span><span data-l="en">${den}</span></small><span class="fn">${fn}</span></span></a>`).join(''));
+
+const root=document.documentElement;
+function setLang(l){
+  root.lang=l; root.dir=l==='ar'?'rtl':'ltr';
+  document.title=l==='ar'?'تقرير برنامج تدريب نجاح العملاء':'CSM Training Program Report';
+  try{localStorage.setItem('csmReportLang',l);}catch(e){}
+}
+let saved='ar';
+try{saved=localStorage.getItem('csmReportLang')||'ar';}catch(e){}
+setLang(saved);
+document.getElementById('langBtn').addEventListener('click',()=>setLang(root.lang==='ar'?'en':'ar'));
+</script>
